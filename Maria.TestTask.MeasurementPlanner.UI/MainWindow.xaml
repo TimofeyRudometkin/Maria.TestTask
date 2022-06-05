@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Maria.TestTask.MeasurementPlanner.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="Auto" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -65,87 +65,52 @@
                 <ColumnDefinition Width="110"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <ListView ItemsSource="{Binding PlansForTheFirstDay}" SelectedItem="{Binding SelectedPlanForTheDay.City, Mode=TwoWay}" DisplayMemberPath="City"></ListView>
-                <!--<ListBox ItemsSource="{Binding PlansForTheFirstDay.LimitOfMeasurements}" SelectedItem="{Binding SelectedPlanForTheDay.LimitOfMeasurements, Mode=TwoWay}" Margin="10"/>-->
-            </Grid>
-            <Grid Grid.Column="1">
-                <ListBox ItemsSource="{Binding PlansForTheSecondDay.DateOfTheDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Key" Margin="10"/>
-            </Grid>
-            <Grid Grid.Column="2">
-                <ListBox ItemsSource="{Binding PlansForTheThirdDay.DictDtAndMeasurements.Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            </Grid>
-            <Grid Grid.Column="3">
-                <ListBox ItemsSource="{Binding PlansForTheFourthDay.DictDtAndMeasurements.Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            </Grid>
-            <Grid Grid.Column="4">
-                <ListBox ItemsSource="{Binding PlansForTheFifthDay.DictDtAndMeasurements.Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            </Grid>
-            <Grid Grid.Column="5">
-                <ListBox ItemsSource="{Binding PlansForTheSixthDay.DictDtAndMeasurements.Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            </Grid>
-            <Grid Grid.Column="6">
-                <ListBox ItemsSource="{Binding PlansForTheSeventhDay.DictDtAndMeasurements.Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            </Grid>
-        </Grid>
-
-
-
-
-
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="130"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <ListView
-            ItemsSource="{Binding Measurings}"
-            SelectedItem="{Binding SelectedMeasuring, Mode=TwoWay}"
-            DisplayMemberPath="Name"></ListView>
-        </Grid>
-        <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="450"/>
             </Grid.RowDefinitions>
-
-            <Label Grid.Row="0" Content="Id" Margin="10"/>
-            <Label Grid.Row="1" Content="Name" Margin="10"/>
-            <Label Grid.Row="2" Content="Surname" Margin="10"/>
-            <Label Grid.Row="3" Content="Patronymic" Margin="10"/>
-            <Label Grid.Row="4" Content="TelephoneNumber" Margin="10"/>
-            <Label Grid.Row="5" Content="City" Margin="10"/>
-
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Label Content="{Binding PlansForTheFirstDay[0].NumberOfAvailableMeasurements}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Label Content="{Binding PlansForTheSecondDay[0].NumberOfAvailableMeasurements}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="2" Grid.Row="0">
+                <Label Content="{Binding PlansForTheThirdDay[0].NumberOfAvailableMeasurements}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="3" Grid.Row="0">
+                <Label Content="{Binding PlansForTheFourthDay[0].NumberOfAvailableMeasurements}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="4" Grid.Row="0">
+                <Label Content="{Binding PlansForTheFifthDay[0].NumberOfAvailableMeasurements}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="5" Grid.Row="0">
+                <Label Content="{Binding PlansForTheSixthDay[0].NumberOfAvailableMeasurements}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="6" Grid.Row="0">
+                <Label Content="{Binding PlansForTheSeventhDay[0].NumberOfAvailableMeasurements}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="1">
+                <ListBox ItemsSource="{Binding PlansForTheFirstDay[0].DictDtAndMeasurements.Keys}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <ListBox ItemsSource="{Binding PlansForTheSecondDay[0].DictDtAndMeasurements.Keys}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="2" Grid.Row="1">
+                <ListBox ItemsSource="{Binding PlansForTheThirdDay[0].DictDtAndMeasurements.Keys}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="3" Grid.Row="1">
+                <ListBox ItemsSource="{Binding PlansForTheFourthDay[0].DictDtAndMeasurements.Keys}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="4" Grid.Row="1">
+                <ListBox ItemsSource="{Binding PlansForTheFifthDay[0].DictDtAndMeasurements.Keys}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="5" Grid.Row="1">
+                <ListBox ItemsSource="{Binding PlansForTheSixthDay[0].DictDtAndMeasurements.Keys}" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="6" Grid.Row="1">
+                <ListBox ItemsSource="{Binding PlansForTheSeventhDay[0].DictDtAndMeasurements.Keys}" Margin="10"/>
+            </Grid>
         </Grid>
-        <Grid Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="45"/>
-            </Grid.RowDefinitions>
-
-            <TextBox Grid.Row="0" Text="{Binding SelectedMeasuring.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            <TextBox Grid.Row="1" Text="{Binding SelectedMeasuring.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            <TextBox Grid.Row="2" Text="{Binding SelectedMeasuring.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            <TextBox Grid.Row="3" Text="{Binding SelectedMeasuring.Patronymic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            <TextBox Grid.Row="4" Text="{Binding SelectedMeasuring.TelephoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-            <TextBox Grid.Row="5" Text="{Binding SelectedMeasuring.City, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-        </Grid>-->
-
-
-
-
-
     </Grid>
 </Window>

@@ -2,6 +2,7 @@
 using Maria.TestTask.MeasurementPlanner.UI.Data;
 using System.Collections.ObjectModel;
 using System;
+using System.Collections.Generic;
 
 namespace Maria.TestTask.MeasurementPlanner.UI.ViewModel
 {
@@ -32,6 +33,7 @@ namespace Maria.TestTask.MeasurementPlanner.UI.ViewModel
         }
         public ObservableCollection<Measuring> Measurings { get; set; }
         private IMeasurementRepository _measurementDataService;
+        public IEnumerable<PlanForTheDay> PlansForThetDay { get; set; }
         public ObservableCollection<PlanForTheDay> PlansForTheFirstDay { get; set; }
         public ObservableCollection<PlanForTheDay> PlansForTheSecondDay { get; set; }
         public ObservableCollection<PlanForTheDay> PlansForTheThirdDay { get; set; }
@@ -53,6 +55,10 @@ namespace Maria.TestTask.MeasurementPlanner.UI.ViewModel
             PlansForTheSixthDay = new ObservableCollection<PlanForTheDay>();
             PlansForTheSeventhDay = new ObservableCollection<PlanForTheDay>();
             _plansForTheDayDataService = PlansForTheDayDataService;
+            PlansForThetDay = _plansForTheDayDataService.GetAll();//прописал здесь, т.к. при вызове GetAll элементы не берутся из хранилица, а вновь создаются, поэтому коллекцию берём 1 раз
+                                                                  //не помогло, значение свойства NumberOfAvailableMeasurements всё равно меняется
+                                                                  //почему-то конструктор класса срабатывает
+                                                                  //если разобраться не получиться доработать конструктор
         }
         private void UpdatePlansOnWeek()
         {
@@ -65,8 +71,9 @@ namespace Maria.TestTask.MeasurementPlanner.UI.ViewModel
             PlansForTheSeventhDay.Clear();
 
             DateTime dtTemp = DateTime.Now.Date;
-            var plansForTheDays = _plansForTheDayDataService.GetAll();
-            foreach (var plan in plansForTheDays)
+            //var plansForTheDays = _plansForTheDayDataService.GetAll();
+            //foreach (var plan in plansForTheDays)
+            foreach (var plan in PlansForThetDay)
             {
                 if (plan?.DateOfTheDay.Date == dtTemp && plan?.City == _selectedMeasuring?.City)
                 {

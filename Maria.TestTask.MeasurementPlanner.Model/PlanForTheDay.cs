@@ -12,7 +12,8 @@ namespace Maria.TestTask.MeasurementPlanner.Model
         private byte _numberOfAvailableMeasurements;
         private string _city;
         private DateTime _dtOfMeasurements;
-        private Dictionary<DateTime, Measuring> _dictDtAndMeasurements = new Dictionary<DateTime, Measuring>();
+        private Dictionary<string, Measuring> _dictDtAndMeasurements = new Dictionary<string, Measuring>();
+        //private string[] _scheduleOfAvailable;
         private byte _durationOfMeasurementInMinutes = 30;
         private byte _hourFirstMeasurement = 9;
         private byte _minuteFirstMeasurement = 0;
@@ -20,14 +21,18 @@ namespace Maria.TestTask.MeasurementPlanner.Model
         private byte _minuteLastMeasurement = 30;
         public PlanForTheDay(byte limitOfMeasurements, string city, DateTime dtOfMeasurements)
         {
+            //var dfd = _dictDtAndMeasurements.Keys;
+            List<string> listTemp = new List<string>();
             _city = city;
             _dtOfMeasurements = dtOfMeasurements.Date;
             DateTime dtTemp1 = new DateTime(dtOfMeasurements.Year, dtOfMeasurements.Month, dtOfMeasurements.Day, _hourFirstMeasurement, _minuteFirstMeasurement, 0);
             DateTime dtTemp2 = new DateTime(dtOfMeasurements.Year, dtOfMeasurements.Month, dtOfMeasurements.Day, _hourLastMeasurement, _minuteLastMeasurement, 0);
             for (; dtTemp1.AddMinutes(_durationOfMeasurementInMinutes) <= dtTemp2; dtTemp1 = dtTemp1.AddMinutes(_durationOfMeasurementInMinutes))
             {
-                _dictDtAndMeasurements.Add(dtTemp1, null);
+                _dictDtAndMeasurements.Add($"c {dtTemp1.ToString("HH mm")} до {dtTemp1.AddMinutes(_durationOfMeasurementInMinutes).ToString("HH mm")}", null);
+                //listTemp.Add($"c {dtTemp1.ToString("HH mm")} до {dtTemp1.AddMinutes(_durationOfMeasurementInMinutes)}");
             }
+            //_scheduleOfAvailable = listTemp.ToArray();
             _limitOfMeasurements = limitOfMeasurements < _dictDtAndMeasurements.Count() ? limitOfMeasurements : (byte)_dictDtAndMeasurements.Count();
             _numberOfAvailableMeasurements = _limitOfMeasurements;
         }
@@ -35,20 +40,22 @@ namespace Maria.TestTask.MeasurementPlanner.Model
         public byte NumberOfAvailableMeasurements { get => _numberOfAvailableMeasurements; }
         public string City { get => _city; }
         public DateTime DateOfTheDay { get => _dtOfMeasurements; }
-        public Dictionary<DateTime, Measuring> DictDtAndMeasurements { get => _dictDtAndMeasurements; }
-        public Boolean AddMeasuring(DateTime dtMeasuring, Measuring measuring)
-        {
-            try
-            {
-                if (_dictDtAndMeasurements[dtMeasuring] == null)
-                {
-                    _dictDtAndMeasurements[dtMeasuring] = measuring;
-                    _numberOfAvailableMeasurements--;
-                    return true;
-                }
-            }
-            catch { }
-            return false;
-        }
+        //public string[] ScheduleOfAvailable { get => _scheduleOfAvailable; set => _scheduleOfAvailable = value; }
+        //public DateTime[] AvailableDateTime { get => _dictDtAndMeasurements.Keys.ToArray(); }
+        public Dictionary<string, Measuring> DictDtAndMeasurements { get => _dictDtAndMeasurements; set => _dictDtAndMeasurements = value; }
+        //public Boolean AddMeasuring(DateTime dtMeasuring, Measuring measuring)
+        //{
+        //    try
+        //    {
+        //        if (_dictDtAndMeasurements[dtMeasuring] == null)
+        //        {
+        //            _dictDtAndMeasurements[dtMeasuring] = measuring;
+        //            _numberOfAvailableMeasurements--;
+        //            return true;
+        //        }
+        //    }
+        //    catch { }
+        //    return false;
+        //}
     }
 }
