@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.7.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Maria.TestTask.MeasurementPlanner.Model\Maria.TestTask.MeasurementPlanner.Model.csproj" />
+    <ProjectReference Include="..\Maria.TestTask.MeasurementPlanner.UI\Maria.TestTask.MeasurementPlanner.UI.csproj" />
+  </ItemGroup>
+
+</Project>
