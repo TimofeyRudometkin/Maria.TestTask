@@ -66,10 +66,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <ListBox ItemsSource="{Binding PlansForTheFirstDay.DictDtAndMeasurements.Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <ListView ItemsSource="{Binding PlansForTheFirstDay}" SelectedItem="{Binding SelectedPlanForTheDay.City, Mode=TwoWay}" DisplayMemberPath="City"></ListView>
+                <!--<ListBox ItemsSource="{Binding PlansForTheFirstDay.LimitOfMeasurements}" SelectedItem="{Binding SelectedPlanForTheDay.LimitOfMeasurements, Mode=TwoWay}" Margin="10"/>-->
             </Grid>
             <Grid Grid.Column="1">
-                <ListBox ItemsSource="{Binding PlansForTheSecondDay.DictDtAndMeasurements.Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <ListBox ItemsSource="{Binding PlansForTheSecondDay.DateOfTheDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Key" Margin="10"/>
             </Grid>
             <Grid Grid.Column="2">
                 <ListBox ItemsSource="{Binding PlansForTheThirdDay.DictDtAndMeasurements.Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
