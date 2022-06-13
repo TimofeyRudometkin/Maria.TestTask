@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 namespace Maria.TestTask.MeasurementPlanner.UI.Data
 {
-    public class PlansForTheDaysRepository:IPlansForTheDaysRepository
+    public class PlansForTheDaysRepository : IPlansForTheDaysRepository
     {
+        //public IEnumerable<PlanForTheDay> GetAll(IEnumerable<PlanForTheDay> PlansForThetDay)
         public IEnumerable<PlanForTheDay> GetAll()
         {
             string[] cities = { "Саратов", "Самара", "Тольятти", "Балаково", "Новгород", "Москва", "Санкт-Петербург" };
@@ -14,7 +15,7 @@ namespace Maria.TestTask.MeasurementPlanner.UI.Data
             DateTime dtTemp = DateTime.Now.AddDays(-3);
             DateTime dtLastDay = DateTime.Now.AddDays(10);
 
-            for(; dtTemp < dtLastDay; dtTemp = dtTemp.AddDays(1))
+            for (; dtTemp < dtLastDay; dtTemp = dtTemp.AddDays(1))
             {
                 foreach (string city in cities)
                 {

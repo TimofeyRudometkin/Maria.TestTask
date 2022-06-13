@@ -3,6 +3,10 @@ using Maria.TestTask.MeasurementPlanner.UI.Data;
 using System.Collections.ObjectModel;
 using System;
 using System.Collections.Generic;
+using Maria.TestTask.MeasurementPlanner.UI.Commands;
+using System.Windows.Input;
+using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace Maria.TestTask.MeasurementPlanner.UI.ViewModel
 {
@@ -15,95 +19,265 @@ namespace Maria.TestTask.MeasurementPlanner.UI.ViewModel
             set
             {
                 _selectedMeasuring = value;
-                _selectedPlanForTheDay = null;
-                UpdatePlansOnWeek();
+                DateTime dtTemp = DateTime.Now.Date;
+                foreach (PlanForTheDay planForTheDay in PlansForThetDay)
+                {
+                    if (planForTheDay.City == value.City && planForTheDay.DateOfTheDay == dtTemp)
+                    {
+                        PlanForTheFirstDay = planForTheDay;
+                    }else if (planForTheDay.City == value.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(1))
+                    {
+                        PlansForTheSecondDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == value.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(2))
+                    {
+                        PlansForTheThirdDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == value.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(3))
+                    {
+                        PlansForTheFourthDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == value.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(4))
+                    {
+                        PlansForTheFifthDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == value.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(5))
+                    {
+                        PlansForTheSixthDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == value.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(6))
+                    {
+                        PlansForTheSeventhDay = planForTheDay;
+                    }
+                }
                 OnPropertyChanged();
             }
         }
-        private PlanForTheDay _selectedPlanForTheDay;
-        public PlanForTheDay SelectedPlanForTheDay
+        //private PlanForTheDay _selectedPlanForTheDay;
+        //private PlanForTheDay SelectedPlanForTheDay
+        //{
+        //    get => _selectedPlanForTheDay;
+        //    set
+        //    {
+        //        _selectedPlanForTheDay = value;
+        //    }
+        //}
+        private PlanForTheDay _planForTheFirstDay;
+        public PlanForTheDay PlanForTheFirstDay
         {
-            get => _selectedPlanForTheDay;
+            get => _planForTheFirstDay;
             set
             {
-                _selectedPlanForTheDay = value;
-                //UpdatePlansOnWeek();
+                _planForTheFirstDay = value;
+                //if(SelectedPlanForTheDay?.DateOfTheDay == value?.DateOfTheDay)
+                //{
+                //    SelectedPlanForTheDay = value;
+                //}
+                OnPropertyChanged();
+            }
+        }
+        private PlanForTheDay _plansForTheSecondDay;
+        public PlanForTheDay PlansForTheSecondDay
+        {
+            get => _plansForTheSecondDay;
+            set
+            {
+                _plansForTheSecondDay = value;
+                //if(SelectedPlanForTheDay?.DateOfTheDay == value?.DateOfTheDay)
+                //{
+                //    SelectedPlanForTheDay = value;
+                //}
+                OnPropertyChanged();
+            }
+        }
+        private PlanForTheDay _plansForTheThirdDay;
+        public PlanForTheDay PlansForTheThirdDay
+        {
+            get => _plansForTheThirdDay;
+            set
+            {
+                _plansForTheThirdDay = value;
+                //if (SelectedPlanForTheDay?.DateOfTheDay == value?.DateOfTheDay)
+                //{
+                //    SelectedPlanForTheDay = value;
+                //}
+                OnPropertyChanged();
+            }
+        }
+        private PlanForTheDay _plansForTheFourthDay;
+        public PlanForTheDay PlansForTheFourthDay
+        {
+            get => _plansForTheFourthDay;
+            set
+            {
+                _plansForTheFourthDay = value;
+                //if (SelectedPlanForTheDay?.DateOfTheDay == value?.DateOfTheDay)
+                //{
+                //    SelectedPlanForTheDay = value;
+                //}
+                OnPropertyChanged();
+            }
+        }
+        private PlanForTheDay _plansForTheFifthDay;
+        public PlanForTheDay PlansForTheFifthDay
+        {
+            get => _plansForTheFifthDay;
+            set
+            {
+                _plansForTheFifthDay = value;
+                //if (SelectedPlanForTheDay?.DateOfTheDay == value?.DateOfTheDay)
+                //{
+                //    SelectedPlanForTheDay = value;
+                //}
+                OnPropertyChanged();
+            }
+        }
+        private PlanForTheDay _plansForTheSixthDay;
+        public PlanForTheDay PlansForTheSixthDay
+        {
+            get => _plansForTheSixthDay;
+            set
+            {
+                _plansForTheSixthDay = value;
+                //if (SelectedPlanForTheDay?.DateOfTheDay == value?.DateOfTheDay)
+                //{
+                //    SelectedPlanForTheDay = value;
+                //}
+                OnPropertyChanged();
+            }
+        }
+        private PlanForTheDay _plansForTheSeventhDay;
+        public PlanForTheDay PlansForTheSeventhDay
+        {
+            get => _plansForTheSeventhDay;
+            set
+            {
+                _plansForTheSeventhDay = value;
+                //if (SelectedPlanForTheDay?.DateOfTheDay == value?.DateOfTheDay)
+                //{
+                //    SelectedPlanForTheDay = value;
+                //}
+                OnPropertyChanged();
+            }
+        }
+        private string _selectedTimeRange;
+        public string SelectedTimeRange
+        {
+            get => _selectedTimeRange;
+            set
+            {
+                _selectedTimeRange = value;
                 OnPropertyChanged();
             }
         }
         public ObservableCollection<Measuring> Measurings { get; set; }
         private IMeasurementRepository _measurementDataService;
-        public IEnumerable<PlanForTheDay> PlansForThetDay { get; set; }
-        public ObservableCollection<PlanForTheDay> PlansForTheFirstDay { get; set; }
-        public ObservableCollection<PlanForTheDay> PlansForTheSecondDay { get; set; }
-        public ObservableCollection<PlanForTheDay> PlansForTheThirdDay { get; set; }
-        public ObservableCollection<PlanForTheDay> PlansForTheFourthDay { get; set; }
-        public ObservableCollection<PlanForTheDay> PlansForTheFifthDay { get; set; }
-        public ObservableCollection<PlanForTheDay> PlansForTheSixthDay { get; set; }
-        public ObservableCollection<PlanForTheDay> PlansForTheSeventhDay { get; set; }
+        private ObservableCollection<PlanForTheDay> _plansForThetDay;
+        public ObservableCollection<PlanForTheDay> PlansForThetDay { get=> _plansForThetDay; 
+            set
+            {
+                DateTime dtTemp = DateTime.Now.Date;
+                foreach (PlanForTheDay planForTheDay in value)
+                {
+                    if (planForTheDay.City == _selectedMeasuring.City && planForTheDay.DateOfTheDay == dtTemp)
+                    {
+                        PlanForTheFirstDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == _selectedMeasuring.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(1))
+                    {
+                        PlansForTheSecondDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == _selectedMeasuring.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(2))
+                    {
+                        PlansForTheThirdDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == _selectedMeasuring.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(3))
+                    {
+                        PlansForTheFourthDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == _selectedMeasuring.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(4))
+                    {
+                        PlansForTheFifthDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == _selectedMeasuring.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(5))
+                    {
+                        PlansForTheSixthDay = planForTheDay;
+                    }
+                    else if (planForTheDay.City == _selectedMeasuring.City && planForTheDay.DateOfTheDay == dtTemp.AddDays(6))
+                    {
+                        PlansForTheSeventhDay = planForTheDay;
+                    }
+                }
+                _plansForThetDay = value;
+            }
+        }
 
         private IPlansForTheDaysRepository _plansForTheDayDataService;
+        public AddMeasuringToPlan ButtonAddMeasuringToPlan { get; set; }
         public MainViewModel(IMeasurementRepository MeasurementDataService, IPlansForTheDaysRepository PlansForTheDayDataService)
         {
             Measurings = new ObservableCollection<Measuring>();
             _measurementDataService = MeasurementDataService;
-            PlansForTheFirstDay = new ObservableCollection<PlanForTheDay>();
-            PlansForTheSecondDay = new ObservableCollection<PlanForTheDay>();
-            PlansForTheThirdDay = new ObservableCollection<PlanForTheDay>();
-            PlansForTheFourthDay = new ObservableCollection<PlanForTheDay>();
-            PlansForTheFifthDay = new ObservableCollection<PlanForTheDay>();
-            PlansForTheSixthDay = new ObservableCollection<PlanForTheDay>();
-            PlansForTheSeventhDay = new ObservableCollection<PlanForTheDay>();
+            PlansForThetDay = new ObservableCollection<PlanForTheDay>();
             _plansForTheDayDataService = PlansForTheDayDataService;
-            PlansForThetDay = _plansForTheDayDataService.GetAll();//прописал здесь, т.к. при вызове GetAll элементы не берутся из хранилица, а вновь создаются, поэтому коллекцию берём 1 раз
-                                                                  //не помогло, значение свойства NumberOfAvailableMeasurements всё равно меняется
-                                                                  //почему-то конструктор класса срабатывает
-                                                                  //если разобраться не получиться доработать конструктор
+            ButtonAddMeasuringToPlan = new AddMeasuringToPlan(this);
         }
-        private void UpdatePlansOnWeek()
+        public void AddMeasuringToPlan()
         {
-            PlansForTheFirstDay.Clear();
-            PlansForTheSecondDay.Clear();
-            PlansForTheThirdDay.Clear();
-            PlansForTheFourthDay.Clear();
-            PlansForTheFifthDay.Clear();
-            PlansForTheSixthDay.Clear();
-            PlansForTheSeventhDay.Clear();
-
-            DateTime dtTemp = DateTime.Now.Date;
-            //var plansForTheDays = _plansForTheDayDataService.GetAll();
-            //foreach (var plan in plansForTheDays)
-            foreach (var plan in PlansForThetDay)
+            PlanForTheDay tempPlanForTheDay = null;
+            string strTemp = Regex.Match(SelectedTimeRange, @"\[(.*?),").Groups[1].Value;
+            foreach (PlanForTheDay plan in PlansForThetDay)
             {
-                if (plan?.DateOfTheDay.Date == dtTemp && plan?.City == _selectedMeasuring?.City)
+                if (plan.DictDtAndMeasurements.ContainsValue(SelectedMeasuring.Id))
                 {
-                    PlansForTheFirstDay.Add(plan);
+                    MessageBox.Show($"Замер № {SelectedMeasuring.Id} уже был добавлен на {plan.DateOfTheDay.ToShortDateString()}");
+                    return;
                 }
-                else if (plan?.DateOfTheDay.Date == dtTemp.AddDays(1) && plan?.City == _selectedMeasuring?.City)
+                if (plan.DictDtAndMeasurements.ContainsKey(strTemp))
                 {
-                    PlansForTheSecondDay.Add(plan);
-                }
-                else if (plan?.DateOfTheDay.Date == dtTemp.AddDays(2) && plan?.City == _selectedMeasuring?.City)
-                {
-                    PlansForTheThirdDay.Add(plan);
-                }
-                else if (plan?.DateOfTheDay.Date == dtTemp.AddDays(3) && plan?.City == _selectedMeasuring?.City)
-                {
-                    PlansForTheFourthDay.Add(plan);
-                }
-                else if (plan?.DateOfTheDay.Date == dtTemp.AddDays(4) && plan?.City == _selectedMeasuring?.City)
-                {
-                    PlansForTheFifthDay.Add(plan);
-                }
-                else if (plan?.DateOfTheDay.Date == dtTemp.AddDays(5) && plan?.City == _selectedMeasuring?.City)
-                {
-                    PlansForTheSixthDay.Add(plan);
-                }
-                else if (plan?.DateOfTheDay.Date == dtTemp.AddDays(6) && plan?.City == _selectedMeasuring?.City)
-                {
-                    PlansForTheSeventhDay.Add(plan);
+                    tempPlanForTheDay = plan;
                 }
             }
+            if (tempPlanForTheDay?.NumberOfAvailableMeasurements > 0 && tempPlanForTheDay?.DictDtAndMeasurements[strTemp] == 0)
+            {
+                tempPlanForTheDay.DictDtAndMeasurements[strTemp]= SelectedMeasuring.Id;
+                tempPlanForTheDay.NumberOfAvailableMeasurements--;
+                PlansForThetDay[PlansForThetDay.IndexOf(tempPlanForTheDay)]= tempPlanForTheDay;
+                DateTime dtTemp = DateTime.Now.Date;
+                if (tempPlanForTheDay.DateOfTheDay == dtTemp)
+                {
+                    PlanForTheFirstDay = tempPlanForTheDay;
+                }
+                else if (tempPlanForTheDay.DateOfTheDay == dtTemp.AddDays(1))
+                {
+                    PlansForTheSecondDay = tempPlanForTheDay;
+                }
+                else if (tempPlanForTheDay.DateOfTheDay == dtTemp.AddDays(2))
+                {
+                    PlansForTheThirdDay = tempPlanForTheDay;
+                }
+                else if (tempPlanForTheDay.DateOfTheDay == dtTemp.AddDays(3))
+                {
+                    PlansForTheFourthDay = tempPlanForTheDay;
+                }
+                else if (tempPlanForTheDay.DateOfTheDay == dtTemp.AddDays(4))
+                {
+                    PlansForTheFifthDay = tempPlanForTheDay;
+                }
+                else if (tempPlanForTheDay.DateOfTheDay == dtTemp.AddDays(5))
+                {
+                    PlansForTheSixthDay = tempPlanForTheDay;
+                }
+                else if (tempPlanForTheDay.DateOfTheDay == dtTemp.AddDays(6))
+                {
+                    PlansForTheSeventhDay = tempPlanForTheDay;
+                }
+
+
+                MessageBox.Show($"Замер № {SelectedMeasuring.Id} внесён в план на {strTemp} {tempPlanForTheDay.DateOfTheDay.ToShortDateString()}.");
+                return;
+            }
+            MessageBox.Show($"Замер № {SelectedMeasuring.Id} не удалось добавить на {strTemp} {tempPlanForTheDay.DateOfTheDay.ToShortDateString()}.");
         }
         public void Load()
         {
@@ -113,7 +287,13 @@ namespace Maria.TestTask.MeasurementPlanner.UI.ViewModel
             {
                 Measurings.Add(measuring);
             }
+            var planForTheDays = _plansForTheDayDataService.GetAll();
+            foreach (var plan in planForTheDays)
+            {
+                PlansForThetDay.Add(plan);
+            }
         }
+
         /// ///////////////////////////////////
         /// Добавить кнопку внесения выделенного замера в план на день
         /// 

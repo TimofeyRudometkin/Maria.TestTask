@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="View\" />
+    <Folder Include="Converter\" />
   </ItemGroup>
 
   <ItemGroup>
